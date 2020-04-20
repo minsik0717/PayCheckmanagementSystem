@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import paycheck.Executive;
+import paycheck.Paycheck;
+import paycheck.Producer;
+
 public class PaycheckManager {
 	ArrayList<Paycheck> paychecks = new ArrayList<Paycheck>();
 	Scanner input;
@@ -8,72 +12,62 @@ public class PaycheckManager {
 		this.input = input;
 	}
 	
-	public void produer() {
-		Paycheck paycheck = new Paycheck();
-		
-		System.out.print("Produer position:");
-		paycheck.position = input.next();
-		
-		System.out.print("Produer Id:");
-		paycheck.id = input.nextInt();
-		
-		System.out.print("Produer name:");
-		paycheck.name = input.next();
-		
-		System.out.print("Produer pay:");
-		paycheck.pay = input.nextInt();
-		
-		System.out.print("How many produce:");
-		paycheck.produce = input.nextInt();
-		
-		paychecks.add(paycheck);
+	public void addemployees() {
+		int kind = 0;
+		Paycheck paycheck;
+		while(kind != 1 && kind != 2 && kind != 3) {
+			System.out.print("1 for Producer");
+			System.out.print("2 for Employee");
+			System.out.print("3 for Executive");
+			System.out.print("Select num for Employee kind between 1 and 3:");
+			kind = input.nextInt();
+			if(kind == 1) {
+				paycheck = new Producer();
+				paycheck.getUserInput(input);
+				paychecks.add(paycheck);
+				break;
+			}
+			else if (kind == 2) {
+				paycheck = new Paycheck();
+				paycheck.getUserInput(input);
+				paychecks.add(paycheck);
+				break;
+			}
+			else if (kind == 3) {
+				paycheck = new Executive();
+				paycheck.getUserInput(input);
+				paychecks.add(paycheck);
+				break;
+			}
+			else {
+				System.out.print("Select num for Employee kind between 1 and 3:");
+			}
+		}
 	}
 	
-	public void employee() {
-		Paycheck paycheck = new Paycheck();
-		
-		System.out.print("Employee position:");
-		paycheck.position = input.next();
-		
-		System.out.print("Produer Id:");
-		paycheck.id = input.nextInt();
-		
-		System.out.print("Employee name:");
-		String employeename = input.next();
-		
-		System.out.print("Employee pay:");
-		int employeepay = input.nextInt();
-				
-		paychecks.add(paycheck);
-		}
-	
-	public void executive() {
-		Paycheck paycheck = new Paycheck();
-		
-		System.out.print("Executive position:");
-		paycheck.position = input.next();
-		
-		System.out.print("Produer Id:");
-		paycheck.id = input.nextInt();
-		
-		System.out.print("Executive name:");
-		String executivename = input.next();
-		
-		System.out.print("Executive pay:");
-		int executivepay = input.nextInt();
-		
-		System.out.print("Bonus:");
-		int bonus = input.nextInt();
-		
-		paychecks.add(paycheck);
+		public void deleteemployees() {
+			System.out.print("Enter Id:");
+			int id = input.nextInt();
+			int index = -1;
+			for (int i = 0; i<paychecks.size(); i++) {
+				Paycheck paycheck = paychecks.get(i);
+				if(paychecks.get(i).getId() == id) {
+					index = i;
+					break;
+				}
 			}
-	
-	public void edit() {
+			if (index >= 0) {
+				paychecks.remove(index);
+				System.out.println("the employee" + id + "is deleted");
+			}
+		}
+		
+	public void editemployees() {
 		System.out.print("Enter Id:");
 		int id = input.nextInt();
 		for (int i = 0; i<paychecks.size(); i++) {
 			Paycheck paycheck = paychecks.get(i);
-			if(paycheck.id == id) {
+			if(paycheck.getId() == id) {
 				int num = -1;
 				while (num != 5) {
 					System.out.println("*** PayCheck Info Edit Menu ***");
@@ -86,19 +80,23 @@ public class PaycheckManager {
 					num = input.nextInt();
 					if (num == 1) {
 						System.out.print("Enter Position:");
-						paycheck.position = input.next();
+						String position = input.next();
+						paycheck.setPosition(position);
 					}
 					else if (num == 2) {
 						System.out.print("Enter Id:");
-						paycheck.id = input.nextInt();
+						int Id = input.nextInt();
+						paycheck.setId(id);
 					}
 					else if (num == 3) {
 						System.out.print("Enter Name:");
-						paycheck.name = input.next();
+						String name = input.next();
+						paycheck.setName(name);
 					}
 					else if(num == 4){
 						System.out.print("Enter pay:");
-						paycheck.pay = input.nextInt();
+						int pay = input.nextInt();
+						paycheck.setPay(pay);
 					}
 					else {
 						continue;
@@ -108,10 +106,12 @@ public class PaycheckManager {
 			}
 		}
 	}
-
+	
+	
 	public void viewpaychecks() {
 //		System.out.print("Id:");
 //		int paycheckId = input.nextInt();
+		System.out.println("# of registered paychecks:" + paychecks.size());
 		for (int i = 0; i<paychecks.size(); i++) {
 			paychecks.get(i).printInfo();
 		}
