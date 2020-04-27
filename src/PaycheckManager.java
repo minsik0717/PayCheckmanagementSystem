@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 import paycheck.Executive;
 import paycheck.Paycheck;
+import paycheck.Paycheckkind;
 import paycheck.Producer;
 
 public class PaycheckManager {
@@ -16,25 +17,25 @@ public class PaycheckManager {
 		int kind = 0;
 		Paycheck paycheck;
 		while(kind != 1 && kind != 2 && kind != 3) {
-			System.out.print("1 for Producer");
-			System.out.print("2 for Employee");
+			System.out.println("1 for Producer");
+			System.out.println("2 for Employee");
 			System.out.print("3 for Executive");
 			System.out.print("Select num for Employee kind between 1 and 3:");
 			kind = input.nextInt();
 			if(kind == 1) {
-				paycheck = new Producer();
+				paycheck = new Producer(Paycheckkind.Producer);
 				paycheck.getUserInput(input);
 				paychecks.add(paycheck);
 				break;
 			}
 			else if (kind == 2) {
-				paycheck = new Paycheck();
+				paycheck = new Paycheck(Paycheckkind.Employee);
 				paycheck.getUserInput(input);
 				paychecks.add(paycheck);
 				break;
 			}
 			else if (kind == 3) {
-				paycheck = new Executive();
+				paycheck = new Executive(Paycheckkind.Executive);
 				paycheck.getUserInput(input);
 				paychecks.add(paycheck);
 				break;
@@ -80,8 +81,8 @@ public class PaycheckManager {
 					num = input.nextInt();
 					if (num == 1) {
 						System.out.print("Enter Position:");
-						String position = input.next();
-						paycheck.setPosition(position);
+//						String position = input.next();
+//						paycheck.setPosition(position);
 					}
 					else if (num == 2) {
 						System.out.print("Enter Id:");

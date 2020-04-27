@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Paycheck {
 	protected Paycheckkind kind = Paycheckkind.Employee;
-	protected String position;
 	protected String name;
 	protected int id;
 	protected int pay;
@@ -15,6 +14,9 @@ public class Paycheck {
 		
 	}
 
+	public Paycheck(Paycheckkind kind){
+		this.kind = kind;
+	}
 
 //	public Paycheck(String position, String name,int id, int pay, int produce, int bonus) {
 //		this.position = position;
@@ -24,8 +26,16 @@ public class Paycheck {
 //		this.produce = produce;
 //	}
 
-	public Paycheck(String position, String name, int id, int pay, int produce, int bonus) {
-		this.position = position;
+	public Paycheck(String name, int id, int pay, int produce, int bonus) {	
+		this.id = id;
+		this.name = name;
+		this.pay = pay;
+		this.produce = produce;
+		this.bonus = bonus;
+	}
+	
+	public Paycheck(Paycheckkind kind, String name, int id, int pay, int produce, int bonus) {
+		this.kind = kind;
 		this.id = id;
 		this.name = name;
 		this.pay = pay;
@@ -51,14 +61,14 @@ public class Paycheck {
 	}
 
 
-	public String getPosition() {
-		return position;
-	}
-
-
-	public void setPosition(String position) {
-		this.position = position;
-	}
+//	public String getPosition() {
+//		return position;
+//	}
+//
+//
+//	public void setPosition(String position) {
+//		this.position = position;
+//	}
 
 
 	public String getName() {
@@ -110,8 +120,22 @@ public class Paycheck {
 		this.bonus = bonus;
 	}
 	
+
 	public void printInfo() {
-		System.out.println("<" + position + ">");
+		String skind = "none";
+		switch(this.kind) {
+		case Producer:
+			skind = "Producer";
+			break;
+		case Employee:
+			skind = "Employee";
+			break;
+		case Executive:
+			skind = "Executive";
+			break;
+		default:
+		}
+		System.out.println("<" + skind	 + ">");
 		System.out.println("Id:" + id);
 		System.out.println("name:" + name);
 		System.out.println("pay:" + pay);
@@ -120,9 +144,9 @@ public class Paycheck {
 	}
 	
 	public void getUserInput(Scanner input) {
-		System.out.print("Employee position:");
-		String position = input.next();
-		this.setPosition(position);
+//		System.out.print("Employee position:");
+//		String position = input.next();
+//		this.setPosition(position);
 		
 		System.out.print("Employee Id:");
 		int id = input.nextInt();
