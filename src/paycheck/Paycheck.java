@@ -2,7 +2,7 @@ package paycheck;
 
 import java.util.Scanner;
 
-public class Paycheck {
+public abstract class Paycheck implements PaycheckInput{
 	protected Paycheckkind kind = Paycheckkind.Employee;
 	protected String name;
 	protected int id;
@@ -17,14 +17,6 @@ public class Paycheck {
 	public Paycheck(Paycheckkind kind){
 		this.kind = kind;
 	}
-
-//	public Paycheck(String position, String name,int id, int pay, int produce, int bonus) {
-//		this.position = position;
-//		this.id = id;
-//		this.name = name;
-//		this.pay = pay;
-//		this.produce = produce;
-//	}
 
 	public Paycheck(String name, int id, int pay, int produce, int bonus) {	
 		this.id = id;
@@ -42,14 +34,6 @@ public class Paycheck {
 		this.produce = produce;
 		this.bonus = bonus;
 	}
-
-//	public Paycheck(String position, String name, int id, int pay, int bonus) {
-//		this.position = position;
-//		this.id = id;
-//		this.name = name;
-//		this.pay = pay;
-//		this.bonus = bonus;
-//	}
 	
 	public Paycheckkind getKind() {
 		return kind;
@@ -59,17 +43,6 @@ public class Paycheck {
 	public void setKind(Paycheckkind kind) {
 		this.kind = kind;
 	}
-
-
-//	public String getPosition() {
-//		return position;
-//	}
-//
-//
-//	public void setPosition(String position) {
-//		this.position = position;
-//	}
-
 
 	public String getName() {
 		return name;
@@ -121,7 +94,39 @@ public class Paycheck {
 	}
 	
 
-	public void printInfo() {
+	public abstract void printInfo();
+	
+	public void setPaycheckID(Scanner input) {
+		System.out.print("Enter Id:");
+		int id = input.nextInt();
+		this.setId(id);
+	}
+	
+	public void setPaycheckName(Scanner input) {
+		System.out.print("Enter Name:");
+		String name = input.next();
+		this.setName(name);
+	}
+	
+	public void setPaycheckPay(Scanner input) {
+		System.out.print("Enter pay:");
+		int pay = input.nextInt();
+		this.setPay(pay);
+	}
+	
+	public void setPaycheckProduce(Scanner input) {
+		System.out.print("How many produce:");
+		int produce = input.nextInt();
+		this.setProduce(produce);
+	}
+	
+	public void setPaycheckBonus(Scanner input) {
+		System.out.print("Bonus:");		
+		int bonus = input.nextInt();
+		this.setBonus(bonus);
+	}
+	
+	public String getKindString() {
 		String skind = "none";
 		switch(this.kind) {
 		case Producer:
@@ -135,37 +140,6 @@ public class Paycheck {
 			break;
 		default:
 		}
-		System.out.println("<" + skind	 + ">");
-		System.out.println("Id:" + id);
-		System.out.println("name:" + name);
-		System.out.println("pay:" + pay);
-		System.out.println("porduce:" + produce);
-		System.out.println("bonus:" + bonus);
-	}
-	
-	public void getUserInput(Scanner input) {
-//		System.out.print("Employee position:");
-//		String position = input.next();
-//		this.setPosition(position);
-		
-		System.out.print("Employee Id:");
-		int id = input.nextInt();
-		this.setId(id);
-		
-		System.out.print("Employee name:");
-		String name = input.next();
-		this.setName(name);
-		
-		System.out.print("Employee pay:");
-		int pay = input.nextInt();
-		this.setPay(pay);
-		
-//		System.out.print("How many produce:");
-//		int produce = input.nextInt();
-//		this.setProduce(produce);
-//		
-//		System.out.print("Bonus:");		
-//		int bonus = input.nextInt();
-//		this.setBonus(bonus);
+		return skind;
 	}
 }
