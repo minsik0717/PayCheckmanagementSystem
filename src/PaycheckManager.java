@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import paycheck.Employee;
@@ -18,36 +19,45 @@ public class PaycheckManager {
 	public void addemployees() {
 		int kind = 0;
 		PaycheckInput paycheckInput;
-		while(kind != 1 && kind != 2 && kind != 3) {
-			showaddEmployee();
-			kind = input.nextInt();
-			switch(kind) {
-			case 1:
-				paycheckInput = new Producer(Paycheckkind.Producer);
-				paycheckInput.getUserInput(input);
-				paychecks.add(paycheckInput);
-				break;
-			case 2:
-				paycheckInput = new Employee(Paycheckkind.Employee);
-				paycheckInput.getUserInput(input);
-				paychecks.add(paycheckInput);
-				break;
-			case 3:
-				paycheckInput = new Executive(Paycheckkind.Executive);
-				paycheckInput.getUserInput(input);
-				paychecks.add(paycheckInput);
-				break;
-			default:
-				System.out.print("Select num for Employee kind between 1 and 3:");
+		while(kind < 1 || kind > 3) {
+			try {
+				showaddEmployee();
+				kind = input.nextInt();
+				switch(kind) {
+				case 1:
+					paycheckInput = new Producer(Paycheckkind.Producer);
+					paycheckInput.getUserInput(input);
+					paychecks.add(paycheckInput);
+					break;
+				case 2:
+					paycheckInput = new Employee(Paycheckkind.Employee);
+					paycheckInput.getUserInput(input);
+					paychecks.add(paycheckInput);
+					break;
+				case 3:
+					paycheckInput = new Executive(Paycheckkind.Executive);
+					paycheckInput.getUserInput(input);
+					paychecks.add(paycheckInput);
+					break;
+				default:
+					System.out.println("Select num for Employee kind between 1 and 3:");
+				}
+			}
+			catch(InputMismatchException e) {
+				System.out.println("Please put an integer between 1 and 3!");
+				if (input.hasNext()) {
+					input.next();
+				}
+				kind = -1;
 			}
 		}
 	}
-	
+
 	public void showaddEmployee() {
 		System.out.println("1 for Producer");
 		System.out.println("2 for Employee");
-		System.out.print("3 for Executive");
-		System.out.print("Select num for Employee kind between 1 and 3:");
+		System.out.println("3 for Executive");
+		System.out.println("Select num for Employee kind between 1 and 3:");
 	}
 
 	public void deleteemployees() {
@@ -56,7 +66,7 @@ public class PaycheckManager {
 		int index = findIndex(id);
 		removefromEmployees(index, id);
 	}
-	
+
 	public int findIndex(int id) {
 		int index = -1;
 		for (int i = 0; i<paychecks.size(); i++) { 
@@ -109,15 +119,12 @@ public class PaycheckManager {
 		}
 	}
 
-
 	public void viewpaychecks() {
 		System.out.println("# of registered paychecks:" + paychecks.size());
 		for (int i = 0; i<paychecks.size(); i++) {
 			paychecks.get(i).printInfo();
 		}
 	}
-
-
 
 	public void showEditMenu() {
 		System.out.println("*** PayCheck Info Edit Menu ***");
@@ -127,5 +134,4 @@ public class PaycheckManager {
 		System.out.println(" 4.Exit");
 		System.out.print("Select one number between 1 - 4:");
 	}
-
 }
