@@ -1,10 +1,16 @@
 package paycheck;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 import exception.EmailFormatException;
 
-public abstract class Paycheck implements PaycheckInput{
+public abstract class Paycheck implements PaycheckInput, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3052523137360874792L;
+	
 	protected Paycheckkind kind = Paycheckkind.Employee;
 	protected String name;
 	protected int id;

@@ -1,17 +1,22 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import paycheck.Employee;
 import paycheck.Executive;
-import paycheck.Paycheck;
 import paycheck.PaycheckInput;
 import paycheck.Paycheckkind;
 import paycheck.Producer;
 
-public class PaycheckManager {
+public class PaycheckManager implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6721058675949947246L; //serialVersionUID∏¶ ≥÷¿Ω
+
 	ArrayList<PaycheckInput> paychecks = new ArrayList<PaycheckInput>();
-	Scanner input;
+	transient Scanner input;
 	PaycheckManager(Scanner input) {
 		this.input = input;
 	}
@@ -133,5 +138,9 @@ public class PaycheckManager {
 		System.out.println(" 3.Edit Pay");
 		System.out.println(" 4.Exit");
 		System.out.print("Select one number between 1 - 4:");
+	}
+	
+	public void setScanner(Scanner input) {
+		this.input = input;
 	}
 }
