@@ -10,7 +10,7 @@ import log.EventLogger;
 
 public class MenuManager {
 	static EventLogger logger = new EventLogger ("log.txt");
-	
+
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		PaycheckManager paycheckManager = getObject("paycheckmanager.ser");
@@ -20,7 +20,7 @@ public class MenuManager {
 		else {
 			paycheckManager.setScanner(input);
 		}
-		
+
 		selectMenu(input, paycheckManager);
 		putObject(paycheckManager, "paycheckmanager.ser");
 	}
@@ -74,15 +74,15 @@ public class MenuManager {
 		System.out.println(" 5.Exit");
 		System.out.print("Select one number between 1 - 5:");
 	}
-	
+
 	public static PaycheckManager getObject(String filename) {
 		PaycheckManager paycheckManager = null;
 		try {
 			FileInputStream file = new FileInputStream(filename);
 			ObjectInputStream in = new ObjectInputStream(file);
-			
+
 			paycheckManager = (PaycheckManager) in.readObject();
-			
+
 			in.close();
 			file.close();
 		} catch (FileNotFoundException e) {
@@ -97,14 +97,14 @@ public class MenuManager {
 
 		return paycheckManager;
 	}
-	
+
 	public static void putObject(PaycheckManager paycheckManager, String filename) {
 		try {
 			FileOutputStream file = new FileOutputStream(filename);
 			ObjectOutputStream out = new ObjectOutputStream(file);
-			
+
 			out.writeObject(paycheckManager);
-			
+
 			out.close();
 			file.close();
 		} catch (FileNotFoundException e) {

@@ -139,7 +139,7 @@ public class PaycheckManager implements Serializable {
 		System.out.println(" 4.Exit");
 		System.out.print("Select one number between 1 - 4:");
 	}
-	
+
 	public void setScanner(Scanner input) {
 		this.input = input;
 	}
