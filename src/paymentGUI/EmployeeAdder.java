@@ -1,4 +1,4 @@
-package PaymentGUI;
+package paymentGUI;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -8,12 +8,12 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
 public class EmployeeAdder extends JPanel {
-	
+
 	WindowFrame frame;
 
 	public EmployeeAdder (WindowFrame frame) {
 		this.frame = frame;
-		
+
 		JPanel panel = new JPanel();
 		panel.setLayout(new SpringLayout());
 

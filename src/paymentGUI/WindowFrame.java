@@ -1,33 +1,41 @@
-package PaymentGUI;
+package paymentGUI;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import manager.PaycheckManager;
+
 public class WindowFrame extends JFrame {
+	
+	PaycheckManager paycheckManager;
+	
 	MenuSelection menuselection;
 	EmployeeAdder employeeadder;
 	EmployeeViewer employeeviewer;
 	
-	public WindowFrame() {
-		this.menuselection = new MenuSelection(this);
-		this.employeeadder = new EmployeeAdder(this);
-		this.employeeviewer = new EmployeeViewer(this);
-		
+	public WindowFrame(PaycheckManager paycheckManager) {
 		this.setSize(500,500);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("My Frmae");
 		
-		this.setupPanel(menuselection);
-		
+		this.paycheckManager = paycheckManager;
+		menuselection = new MenuSelection(this);
+		employeeadder = new EmployeeAdder(this);
+		employeeviewer = new EmployeeViewer(this, this.paycheckManager);
+					
+
+		this.add(menuselection);
+
 		this.setVisible(true);
 	}
-	
+
 	public void setupPanel (JPanel panel) {
 		this.getContentPane().removeAll();
 		this.getContentPane().add(panel);
 		this.revalidate();
 		this.repaint();
 	}
-	
+
 	public MenuSelection getMenuselection() {
 		return menuselection;
 	}

@@ -1,3 +1,4 @@
+package manager;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -5,6 +6,7 @@ import java.util.Scanner;
 
 import paycheck.Employee;
 import paycheck.Executive;
+import paycheck.Paycheck;
 import paycheck.PaycheckInput;
 import paycheck.Paycheckkind;
 import paycheck.Producer;
@@ -130,7 +132,15 @@ public class PaycheckManager implements Serializable {
 			paychecks.get(i).printInfo();
 		}
 	}
+	
+	public int size() {
+		return paychecks.size();
+	}
 
+	public PaycheckInput get(int index) {
+		return (Paycheck) paychecks.get(index);
+	}
+	
 	public void showEditMenu() {
 		System.out.println("*** PayCheck Info Edit Menu ***");
 		System.out.println(" 1.Edit Id");

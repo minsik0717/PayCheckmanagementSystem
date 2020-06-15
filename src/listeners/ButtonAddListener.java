@@ -4,12 +4,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import PaymentGUI.EmployeeAdder;
-import PaymentGUI.EmployeeViewer;
-import PaymentGUI.WindowFrame;
+import paymentGUI.EmployeeAdder;
+import paymentGUI.EmployeeViewer;
+import paymentGUI.WindowFrame;
 
 public class ButtonAddListener implements ActionListener {
-	
+
 	WindowFrame frame;
 
 	public ButtonAddListener(WindowFrame frame) {

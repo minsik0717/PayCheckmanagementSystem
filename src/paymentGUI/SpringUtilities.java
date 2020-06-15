@@ -29,7 +29,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package PaymentGUI;
+package paymentGUI;
 
 import javax.swing.*;
 import javax.swing.SpringLayout;
